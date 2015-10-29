@@ -12,10 +12,10 @@ description: > # this means to ignore newlines until "baseurl:"
   Track trash pickups and get achievements!
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://rit.pics" # the base hostname & protocol for your site
+permalink: pretty
 
 # Limit what is hosted on the site.
 exclude: ["CNAME", "Gemfile", "Gemfile.lock", "README.md"]
-
 
 defaults:
   -
