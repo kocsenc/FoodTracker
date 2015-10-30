@@ -2,7 +2,7 @@
 title: Login
 ---
 <h1>Login</h1>
-<form role="form">
+<form role="form" action="/feed">
     <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" class="form-control" id="email">
@@ -11,6 +11,6 @@ title: Login
         <label for="password">Password:</label>
         <input type="password" class="form-control" id="password">
     </div>
+    <button type="submit" class="btn btn-success">Log in</button>
 </form>
-<a class="btn btn-success" href="/" role="button">Log in</a>
-<a class="btn btn-warning" href="/join" role="button">Join</a>
+<a class="btn btn-warning" href="/join" role="button">Join TrashTracker</a>
