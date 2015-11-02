@@ -15,9 +15,11 @@
             {% if page.url != "/login/" and page.url != "/join/" %}
             <ul class="nav navbar-nav navbar-right">
                 <li {% if page.url == "/submit/" %} class="active" {% endif %}>
-                    <a href="/submit" class="navbar-submit-icon-link">
-                        <span class="glyphicon glyphicon-camera navbar-submit-icon"></span>
-                    </a>
+                    <p class="navbar-btn">
+                        <a href="/submit" class="btn btn-default navbar-submit-icon-button">
+                            <span class="glyphicon glyphicon-camera navbar-submit-icon"></span>
+                        </a>
+                    </p>
                 </li>
             </ul>
             {%endif%}
