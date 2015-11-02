@@ -1,13 +1,22 @@
-<nav class="navbar">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
+<nav class="navbar navbar-default">
+    <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">TrashTracker</a>
-            {% if page.url != "/login/"  and page.url != "/join/"%}
-            <button type="button" class="pull-right btn btn-default navbar-btn">
-               + 
-            </button>
-        {%endif%}
         </div>
-    </div><!-- /.container-fluid -->
+        <div id="navbar">
+            <ul class="nav navbar-nav">
+                <li {% if page.url == "/feed/" %} class="active" {% endif %}>
+                    <a href="/feed">Feed</a>
+                </li>
+                <li {% if page.url == "/profile/" %} class="active" {% endif %}>
+                    <a href="/profile">Profile</a>
+                </li>
+            </ul>
+            {% if page.url != "/login/" and page.url != "/join/" %}
+                <button type="button" class="pull-right btn btn-default navbar-btn">
+                   + 
+                </button>
+            {%endif%}
+        </div>
+    </div>
 </nav>
