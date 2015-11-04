@@ -51,6 +51,11 @@ MediaStreamTrack.getSources(function(sourceInfos){
     video.removeEventListener('click', listener);
     document.getElementById("noCamera").style.display = "block";
   }
+  else
+  {
+    // Style doesn't seem to be setting correctly unless I do this.
+    document.getElementById("noCamera").style.display = "hidden";
+  }
 
   // Not showing vendor prefixes or code that works cross-browser.
   navigator.webkitGetUserMedia({video: { optional: [{sourceId: environmentCamera.id}]}} ,function(stream) {
