@@ -1,0 +1,58 @@
+---
+title: New Submission 
+---
+
+<h2>Add</h2>
+<div id="lel" style="width: 100%; height: auto; position: relative; padding: 0; margin: 0;">
+    <div id="overlay" style="width: 100%; height: 10%; position: absolute; bottom: 0; left: 0; background: rgba(0,0,0, .5); color: white; text-align: center; padding: 0; margin: 0;">
+    </div>
+    <video autoplay id = "camera" style="width: 100%; padding: 0; margin: 0;"></video>
+</div>
+
+
+<script>
+  var video = document.querySelector('video');
+  var overlay = document.querySelector('#overlay');
+        var localMediaStream = null;
+
+video.addEventListener('click', function(){ 
+	if(video.paused) {
+		video.play();
+		overlay.innerHTML = "Tap to Take";
+	} else {
+		video.pause();
+		overlay.innerHTML = "Tap to Retake";
+
+	}
+}, false);
+
+    // Not showing vendor prefixes or code that works cross-browser.
+MediaStreamTrack.getSources(function(sourceInfos){ 
+  console.log(sourceInfos);
+  var videoSources = [];
+  var environmentCamera = null;
+  for (var i = 0; i !== sourceInfos.length; ++i) {
+    var sourceInfo = sourceInfos[i];
+    if (sourceInfo.kind === "video") {
+	videoSources.push(sourceInfo);
+    }
+    
+    if (sourceInfo.facing === "environment") {
+	environmentCamera = sourceInfo;
+    }
+  }
+  environmentCamera = environmentCamera || videoSources[0];
+
+
+  navigator.webkitGetUserMedia({video: { optional: [{sourceId: environmentCamera.id}]}} ,function(stream) {
+    console.log(stream);
+    localMediaStream = stream;
+    video.src = window.URL.createObjectURL(stream);
+  }, function(err){
+	console.log(err);
+  });
+});
+
+
+
+</script>
