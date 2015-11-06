@@ -13,35 +13,16 @@ title: Feed
 
 <!-- Posts -->
 
-<div class="feed-item panel panel-default">
-    <img src="/img/00000000.jpg" class="img-responsive" />
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-sm-6">
-                <span class="glyphicon glyphicon-user"></span>
-                <a href="/profile">greenfiend420</a>
-            </div>
-            <div class="col-sm-6">
-                <span class="glyphicon glyphicon-time"></span>
-                <span class="small text-muted">10-29-2015 16:31:52</span>
-            </div>
-        </div>
-        <p class="small">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        <div class="row">
-            <div class="col-xs-6">
-                <a class="btn btn-default btn-sm btn-block" href="#">
-                    <span class="glyphicon glyphicon-map-marker"></span>
-                    Location
-                </a>
-            </div>
-            <div class="col-xs-6">
-                <a class="btn btn-danger btn-sm btn-block" href="/report">
-                    <span class="glyphicon glyphicon-warning-sign"></span>
-                    Report
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+{% include trashItem.html img="/img/00000000.jpg" user="greenfiend420" time="10-29-2015 07:31:52" %}
+
+{% include trashItem.html img="/img/00000001.jpg" user="concernedcitizen51" time="10-29-2015 09:06:13" msg="Someone left a freaking toilet on the sidewalk. Too heavy for me to move myself." later=true %}
+
+{% include trashItem.html img="/img/00000002.jpg" user="ecofreak123" time="10-29-2015 13:46:02" %}
+
+{% include trashItem.html img="/img/00000003.jpg" user="greenfiend420" time="10-29-2015 19:29:23" msg="If someone has like, a truck or whatever, these tires should probably get thrown out" later=true %}
+
+{% include trashItem.html img="/img/00000004.jpg" user="ecofreak123" time="10-30-2015 10:12:58" msg="What a mess!  Cleaning this up felt great." %}
+
+{% include trashItem.html img="/img/00000005.jpg" user="greenfiend420" time="10-30-2015 16:37:15" %}
+
+{% include trashItem.html img="/img/00000006.jpg" user="concernedcitizen51" time="10-30-2015 16:52:08" msg="Who the hell keeps leaving toilets everywhere?" later=true %}
