@@ -4,7 +4,7 @@
             <a class="navbar-brand" href="/">TrashTracker</a>
         </div>
         <div id="navbar">
-            {% if page.url != "/login/" and page.url != "/join/" %}
+            {% if page.url != "/" and page.url != "/join/" %}{% comment %} "/login/" is now "/" {% endcomment %}
             <ul class="nav navbar-nav">
                 <li {% if page.url == "/feed/" %} class="active" {% endif %}>
                     <a href="/feed">Feed</a>
@@ -24,8 +24,8 @@
             </ul>
             {% else %}
             <ul class="nav navbar-nav">
-                <li {% if page.url == "/login/" %} class="active" {% endif %}>
-                    <a href="/login">Login</a>
+                <li {% if page.url == "/" %} class="active" {% endif %}>{% comment %} "/login/" is now "/" {% endcomment %}
+                    <a href="/">Login</a>
                 </li>
                 <li {% if page.url == "/join/" %} class="active" {% endif %}>
                     <a href="/join">Join</a>
