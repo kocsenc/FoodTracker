@@ -144,6 +144,8 @@ function initMap() {
       };
 
       marker.setPosition(pos);
+      document.getElementById("locLat").value = pos.lat;
+      document.getElementById("locLng").value = pos.lng;
       map.setCenter(pos);
     }, function() {
       handleLocationError(marker, map.getCenter());
