@@ -7,6 +7,7 @@ Additionally, this website was developed as a prototype of a native smartphone a
 
 # Running the Application
 A public version of the application is available at [https://rit.pics](https://rit.pics), but if you want to run it yourself follow the following instructions:
+
 1. Install the latest version of ruby and gems (on Windows get ruby < 2.2)
 2. Run `gem install bundle`
 3. Clone the repo
