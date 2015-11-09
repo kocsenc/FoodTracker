@@ -3,6 +3,7 @@ A UX demo of a trash pickup tracker for SWEN-444 Group 7.
 
 # Disclaimer
 This project is a high-fidelity prototype. It does not implement any business logic.
+Additionally, this website was developed as a prototype of a native smartphone application, so layout on a desktop browser is non-optimal.
 
 # Running the Application
 A public version of the application is available at [https://rit.pics](https://rit.pics), but if you want to run it yourself follow the following instructions:
