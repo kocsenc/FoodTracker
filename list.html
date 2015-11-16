@@ -13,6 +13,41 @@ title: Feed
 
 <!-- Posts -->
 
+<!-- Dynamically generated post... -->
+<div class="feed-item panel panel-default" style="display: none;" id="dynamicPost"> <!-- Hidden to start -->
+    <img src="" class="img-responsive" id="postImage" />
+    <div class="panel-body">    
+        <div class="alert alert-info" id="postLater" style="display: none;">
+            This item needs to be picked up!
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-user"></span>
+                <a href="/profile">rkuehl444</a>
+            </div>
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-time"></span>
+                <span class="small text-muted" id="postTime"></span>
+            </div>
+        </div>
+        <p class="small" id="postNotes"></p>
+        <div class="row">
+            <div class="col-xs-6">
+                <a class="btn btn-default btn-sm btn-block" href="#">
+                    <span class="glyphicon glyphicon-map-marker"></span>
+                    Location
+                </a>
+            </div>
+            <div class="col-xs-6">
+                <a class="btn btn-danger btn-sm btn-block" href="/report">
+                    <span class="glyphicon glyphicon-warning-sign"></span>
+                    Report
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% include trashItem.html img="/img/00000000.jpg" user="greenfiend420" time="10-29-2015 07:31:52" %}
 
 {% include trashItem.html img="/img/00000001.jpg" user="concernedcitizen51" time="10-29-2015 09:06:13" msg="Someone left a freaking toilet on the sidewalk. Too heavy for me to move myself." later=true %}
@@ -26,3 +61,33 @@ title: Feed
 {% include trashItem.html img="/img/00000005.jpg" user="greenfiend420" time="10-30-2015 16:37:15" %}
 
 {% include trashItem.html img="/img/00000006.jpg" user="concernedcitizen51" time="10-30-2015 16:52:08" msg="Who the hell keeps leaving toilets everywhere?" later=true %}
+
+
+<script>
+function storageAvailable(type) {
+  try {
+    var storage = window[type],
+      x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch(e) {
+    return false;
+  }
+}
+
+if (storageAvailable("localStorage") && localStorage.postTime) {
+  document.getElementById("dynamicPost").style.display = "block";
+  
+  // Load the item
+  document.getElementById("postImage").src = localStorage.postImageSrc;
+  
+  if (localStorage.postLater == "true") {
+    document.getElementById("postLater").style.display = "block";
+  }
+
+  document.getElementById("postNotes").innerText = localStorage.postNotes;
+  document.getElementById("postTime").innerText = localStorage.postTime;
+}
+</script>
