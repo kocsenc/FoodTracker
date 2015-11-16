@@ -1,0 +1,352 @@
+---
+title: New Submission 
+---
+<div class="page-header">
+    <h1>Submit</h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <p>
+            Tap the viewfinder below to take a picture.
+        </p>
+        <div class="alert alert-danger" role="alert" id="noCamera" style="display: none;">
+            <strong>Uh oh!</strong> No camera detected.
+        </div>
+        <div id="lel" style="width: 100%; height: auto; position: relative; padding: 0; margin: 0;">
+            <div id="noCameraOverlay" style="width: 100%; height: 100%; position: absolute; bottom: 0; left: 0; background: rgba(0,0,0, .5); color: white; text-align: center; padding: 0; margin: 0; display: none;">No camera detected.</div>
+            <div id="overlay" style="width: 100%; height: 10%; position: absolute; bottom: 0; left: 0; background: rgba(0,0,0, .5); color: white; text-align: center; padding: 0; margin: 0;">Tap to Take</div>
+            <video autoplay id="camera" style="width: 100%; padding: 0; margin: 0;"></video>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <p>
+            Drag the trashcan on the map below to select the trash location.
+        </p>
+        <div class="alert alert-warning" role="alert" id="locationError" style="display: none;">
+            <strong>Uh oh!</strong> We couldn't geolocate you. Please select your location manually below.
+        </div>
+        <div style="width: 100%; height: 500px;">
+            <div id="map" style="height: 100% !important; width: 100% !important;"></div>
+        </div>
+        <form action="/list">
+            <div class="form-group">
+                <label for="locLat">Latitude:</label>
+                <input type="text" class="form-control" id="locLat">
+            </div>
+            <div class="form-group">
+                <label for="locLng">Longitude:</label>
+                <input type="text" class="form-control" id="locLng">
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <input type="text" class="form-control" id="notes" placeholder="(Optional)">
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox"> Flag for later pickup.</label>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Camera scripts -->
+<script>
+var video = document.querySelector('video');
+var overlay = document.querySelector('#overlay');
+var localMediaStream = null;
+
+function listener(){ 
+  if(video.paused) {
+    video.play();
+    overlay.innerHTML = "Tap to Take";
+  } else {
+    video.pause();
+    overlay.innerHTML = "Tap to Retake";
+  }
+}
+
+video.addEventListener('click', listener, false);
+
+MediaStreamTrack.getSources(function(sourceInfos){ 
+  //console.log(sourceInfos);
+  var videoSources = [];
+  var environmentCamera = null;
+  for (var i = 0; i !== sourceInfos.length; ++i) {
+    var sourceInfo = sourceInfos[i];
+    if (sourceInfo.kind === "video") {
+      videoSources.push(sourceInfo);
+    }
+    
+    if (sourceInfo.facing === "environment") {
+      environmentCamera = sourceInfo;
+    }
+  }
+
+  environmentCamera = environmentCamera || videoSources[0];
+
+  if (environmentCamera == null)
+  {
+    overlay.innerHTML = "No camera detected.";
+    video.removeEventListener('click', listener);
+    document.getElementById("noCamera").style.display = "block";
+    document.getElementById("noCameraOverlay").style.display = "block";
+    document.getElementById("overlay").style.display = "none";
+  }
+  else
+  {
+    // There is a camera to use.
+
+    // Not showing vendor prefixes or code that works cross-browser.
+    navigator.webkitGetUserMedia({video: { optional: [{sourceId: environmentCamera.id}]}} ,function(stream) {
+      console.log(stream);
+      localMediaStream = stream;
+      video.src = window.URL.createObjectURL(stream);
+    }, function(err){
+      console.log(err);
+    });
+  }
+});
+</script>
+
+<!-- Map scripts -->
+<script>
+// Note: This requires that you consent to location sharing when
+// prompted by your browser. If you see the error "The Geolocation service
+// failed.", it means you probably did not give permission for the browser to
+// locate you.
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 43.0838822, lng: -77.6759403},
+    zoom: 19,
+    mapTypeId: google.maps.MapTypeId.HYBRID,
+    streetViewControl: false,
+    draggable: true
+  });
+
+  // The reported trash location indicator
+  var marker = new google.maps.Marker({
+      position: map.getCenter(),
+      map: map,
+      title: "Trash Spot",
+      icon: "https://rit.pics/favicons/android-chrome-48x48.png",
+      draggable: true
+  });
+
+  google.maps.event.addListener(marker, "dragend", function(event) {
+    //map.setCenter(marker.position);
+    document.getElementById("locLat").value = marker.position.lat();
+    document.getElementById("locLng").value = marker.position.lng();
+  });
+
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      marker.setPosition(pos);
+      document.getElementById("locLat").value = pos.lat;
+      document.getElementById("locLng").value = pos.lng;
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(marker, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(marker, map.getCenter());
+  }
+}
+
+function handleLocationError(marker, pos) {
+  marker.setPosition(pos);
+  document.getElementById("locationError").style.display = "block";
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs4B2faq7Jq74F5NJfQZFGXkw-_uaRoVc&signed_in=true&callback=initMap" async defer></script>
+
+
+
+
+
+
+
+<!-- More -->
+<script>
+(function() {
+  // The width and height of the captured photo. We will set the
+  // width to the value defined here, but the height will be
+  // calculated based on the aspect ratio of the input stream.
+
+  var width = 320;    // We will scale the photo width to this
+  var height = 0;     // This will be computed based on the input stream
+
+  // |streaming| indicates whether or not we're currently streaming
+  // video from the camera. Obviously, we start at false.
+
+  var streaming = false;
+
+  // The various HTML elements we need to configure or control. These
+  // will be set by the startup() function.
+
+  var video = null;
+  var canvas = null;
+  var photo = null;
+  var startbutton = null;
+
+  function startup() {
+    video = document.getElementById('video');
+    canvas = document.getElementById('canvas');
+    photo = document.getElementById('photo');
+    startbutton = document.getElementById('startbutton');
+
+    navigator.getMedia = ( navigator.getUserMedia ||
+                           navigator.webkitGetUserMedia ||
+                           navigator.mozGetUserMedia ||
+                           navigator.msGetUserMedia);
+
+    navigator.getMedia(
+      {
+        video: true,
+        audio: false
+      },
+      function(stream) {
+        if (navigator.mozGetUserMedia) {
+          video.mozSrcObject = stream;
+        } else {
+          var vendorURL = window.URL || window.webkitURL;
+          video.src = vendorURL.createObjectURL(stream);
+        }
+        video.play();
+      },
+      function(err) {
+        console.log("An error occured! " + err);
+      }
+    );
+
+    video.addEventListener('canplay', function(ev){
+      if (!streaming) {
+        height = video.videoHeight / (video.videoWidth/width);
+      
+        // Firefox currently has a bug where the height can't be read from
+        // the video, so we will make assumptions if this happens.
+      
+        if (isNaN(height)) {
+          height = width / (4/3);
+        }
+      
+        video.setAttribute('width', width);
+        video.setAttribute('height', height);
+        canvas.setAttribute('width', width);
+        canvas.setAttribute('height', height);
+        streaming = true;
+      }
+    }, false);
+
+    startbutton.addEventListener('click', function(ev){
+      takepicture();
+      ev.preventDefault();
+    }, false);
+    
+    clearphoto();
+  }
+
+  // Fill the photo with an indication that none has been
+  // captured.
+
+  function clearphoto() {
+    var context = canvas.getContext('2d');
+    context.fillStyle = "#AAA";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    var data = canvas.toDataURL('image/png');
+    photo.setAttribute('src', data);
+  }
+  
+  // Capture a photo by fetching the current contents of the video
+  // and drawing it into a canvas, then converting that to a PNG
+  // format data URL. By drawing it on an offscreen canvas and then
+  // drawing that to the screen, we can change its size and/or apply
+  // other changes before drawing it.
+
+  function takepicture() {
+    var context = canvas.getContext('2d');
+    if (width && height) {
+      canvas.width = width;
+      canvas.height = height;
+      context.drawImage(video, 0, 0, width, height);
+    
+      var data = canvas.toDataURL('image/png');
+      photo.setAttribute('src', data);
+    } else {
+      clearphoto();
+    }
+  }
+
+  // Set up our event listener to run the startup process
+  // once loading is complete.
+  window.addEventListener('load', startup, false);
+})();
+</script>
+
+<style>
+
+#video {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  width:320px;
+  height:240px;
+}
+
+#photo {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  width:320px;
+  height:240px;
+}
+
+#canvas {
+  display:none;
+}
+
+.camera {
+  width: 340px;
+  display:inline-block;
+}
+
+.output {
+  width: 340px;
+  display:inline-block;
+}
+
+#startbutton {
+  display:block;
+  position:relative;
+  margin-left:auto;
+  margin-right:auto;
+  bottom:32px;
+  background-color: rgba(0, 150, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  color: rgba(255, 255, 255, 1.0);
+}
+
+</style>
+
+  <div class="camera">
+    <video id="video">Video stream not available.</video>
+    <button id="startbutton">Take photo</button> 
+  </div>
+  <canvas id="canvas">
+  </canvas>
+  <div class="output">
+    <img id="photo" alt="The screen capture will appear in this box."> 
+  </div>
