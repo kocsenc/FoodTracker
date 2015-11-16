@@ -18,6 +18,7 @@ title: New Submission
             <div id="overlay" style="width: 100%; height: 10%; position: absolute; bottom: 0; left: 0; background: rgba(0,0,0, .5); color: white; text-align: center; padding: 0; margin: 0;">Tap to Take</div>
             <video autoplay id="camera" style="width: 100%; padding: 0; margin: 0;"></video>
         </div>
+        <canvas id="savingCanvas" style="display: none;"></canvas> <!-- Used to facilitate saving of the image. -->
     </div>
 </div>
 
@@ -46,18 +47,47 @@ title: New Submission
                 <input type="text" class="form-control" id="notes" placeholder="(Optional)">
             </div>
             <div class="checkbox">
-                <label><input type="checkbox"> Flag for later pickup.</label>
+                <label><input type="checkbox" id="laterPickup"> Flag for later pickup.</label>
             </div>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success" onclick="saveAndSubmit()">Submit</button>
         </form>
     </div>
 </div>
 
+<!-- Submission -->
+<script>
+  function saveAndSubmit() {
+    if (storageAvailable("localStorage")) {
+      // Store the form values
+      localStorage.setItem("postImageSrc", canvas.toDataURL('image/png'));
+      localStorage.setItem("postLat", document.getElementById("locLat").value);
+      localStorage.setItem("postLng", document.getElementById("locLng").value);
+      localStorage.setItem("postNotes", document.getElementById("notes").value);
+      localStorage.setItem("postLater", document.getElementById("laterPickup").checked);
+    }
+  }
+</script>
+
 <!-- Camera scripts -->
 <script>
+// Check for localStorage
+function storageAvailable(type) {
+  try {
+    var storage = window[type],
+      x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch(e) {
+    return false;
+  }
+}
+
 var video = document.querySelector('video');
 var overlay = document.querySelector('#overlay');
 var localMediaStream = null;
+var canvas = document.getElementById("savingCanvas");
 
 function listener(){ 
   if(video.paused) {
@@ -66,6 +96,14 @@ function listener(){
   } else {
     video.pause();
     overlay.innerHTML = "Tap to Retake";
+
+    // Draw the image to a hidden canvas
+    var context = canvas.getContext('2d');
+    if (video.videoWidth && video.videoHeight) {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+    }
   }
 }
 
