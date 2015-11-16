@@ -57,21 +57,21 @@ title: New Submission
 <!-- Submission -->
 <script>
   function saveAndSubmit() {
-    if (storageAvailable("localStorage")) {
+    if (storageAvailable("sessionStorage")) {
       // Store the form values
-      localStorage.setItem("postImageSrc", canvas.toDataURL('image/png'));
-      localStorage.setItem("postLat", document.getElementById("locLat").value);
-      localStorage.setItem("postLng", document.getElementById("locLng").value);
-      localStorage.setItem("postNotes", document.getElementById("notes").value);
-      localStorage.setItem("postLater", document.getElementById("laterPickup").checked);
-      localStorage.setItem("postTime", new Date().toLocaleString());
+      sessionStorage.setItem("postImageSrc", canvas.toDataURL('image/png'));
+      sessionStorage.setItem("postLat", document.getElementById("locLat").value);
+      sessionStorage.setItem("postLng", document.getElementById("locLng").value);
+      sessionStorage.setItem("postNotes", document.getElementById("notes").value);
+      sessionStorage.setItem("postLater", document.getElementById("laterPickup").checked);
+      sessionStorage.setItem("postTime", new Date().toLocaleString());
     }
   }
 </script>
 
 <!-- Camera scripts -->
 <script>
-// Check for localStorage
+// Check for sessionStorage
 function storageAvailable(type) {
   try {
     var storage = window[type],

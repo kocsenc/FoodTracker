@@ -77,17 +77,17 @@ function storageAvailable(type) {
   }
 }
 
-if (storageAvailable("localStorage") && localStorage.postTime) {
+if (storageAvailable("sessionStorage") && sessionStorage.postTime) {
   document.getElementById("dynamicPost").style.display = "block";
   
   // Load the item
-  document.getElementById("postImage").src = localStorage.postImageSrc;
+  document.getElementById("postImage").src = sessionStorage.postImageSrc;
   
-  if (localStorage.postLater == "true") {
+  if (sessionStorage.postLater == "true") {
     document.getElementById("postLater").style.display = "block";
   }
 
-  document.getElementById("postNotes").innerText = localStorage.postNotes;
-  document.getElementById("postTime").innerText = localStorage.postTime;
+  document.getElementById("postNotes").innerText = sessionStorage.postNotes;
+  document.getElementById("postTime").innerText = sessionStorage.postTime;
 }
 </script>
