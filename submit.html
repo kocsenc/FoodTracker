@@ -49,7 +49,7 @@ title: New Submission
             <div class="checkbox">
                 <label><input type="checkbox" id="laterPickup"> Flag for later pickup.</label>
             </div>
-            <button type="submit" class="btn btn-success" onclick="saveAndSubmit()">Submit</button>
+            <button type="submit" class="btn btn-success" onclick="saveAndSubmit()" disabled="disabled" id="submitBtn">Submit</button> <!-- Start disabled -->
         </form>
     </div>
 </div>
@@ -89,11 +89,13 @@ var video = document.querySelector('video');
 var overlay = document.querySelector('#overlay');
 var localMediaStream = null;
 var canvas = document.getElementById("savingCanvas");
+var submitBtn = document.getElementById("submitBtn");
 
 function listener(){ 
   if(video.paused) {
     video.play();
     overlay.innerHTML = "Tap to Take";
+    submitBtn.disabled = "disabled";
   } else {
     video.pause();
     overlay.innerHTML = "Tap to Retake";
@@ -105,6 +107,8 @@ function listener(){
       canvas.height = video.videoHeight;
       context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
     }
+
+    submitBtn.removeAttribute("disabled");
   }
 }
 
