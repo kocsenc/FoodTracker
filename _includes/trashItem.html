@@ -19,6 +19,7 @@
         <p class="small">
             {{include.msg}}
         </p>
+        {% unless include.hideButtons %}
         <div class="row">
             <div class="col-xs-6">
                 <a class="btn btn-default btn-sm btn-block" href="#">
@@ -33,5 +34,6 @@
                 </a>
             </div>
         </div>
+        {% endunless %}
     </div>
 </div>
