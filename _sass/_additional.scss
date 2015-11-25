@@ -15,8 +15,14 @@
 	filter: none;
 }
 
-// Padding for the fixed navbar
-body { padding-top: 70px; }
+body { 
+	padding-top: 70px; // Padding for the fixed navbar
+    padding-bottom: 30px; // Keep buttons off the bottom of the page
+}
+
+.page-header {
+	margin-top: 0; // Too big without this
+}
 
 // The camera icon
 .navbar-submit-icon-button {
