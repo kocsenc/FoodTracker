@@ -5,7 +5,8 @@ var map, heatmap;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 43.0838822, lng: -77.6759403},
-    mapTypeId: google.maps.MapTypeId.HYBRID
+    mapTypeId: google.maps.MapTypeId.HYBRID,
+    disableDefaultUI: true
   });
 
   map.fitBounds(new google.maps.LatLngBounds(new google.maps.LatLng(43.08078, -77.68479), new google.maps.LatLng(43.08767, -77.66595))); // SW, NE
@@ -75,5 +76,5 @@ function getPoints() {
 
 </script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs4B2faq7Jq74F5NJfQZFGXkw-_uaRoVc&signed_in=true&libraries=visualization&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs4B2faq7Jq74F5NJfQZFGXkw-_uaRoVc&libraries=visualization&callback=initMap">
 </script>
