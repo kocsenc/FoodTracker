@@ -6,7 +6,8 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 43.0838822, lng: -77.6759403},
     mapTypeId: google.maps.MapTypeId.HYBRID,
-    disableDefaultUI: true
+    disableDefaultUI: true, // Disable the zoom, street view, and map type controls
+    styles: [{ featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }]}] // Hide the default POIs
   });
 
   map.fitBounds(new google.maps.LatLngBounds(new google.maps.LatLng(43.08078, -77.68479), new google.maps.LatLng(43.08767, -77.66595))); // SW, NE
