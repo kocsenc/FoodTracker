@@ -9,7 +9,7 @@ title: TrashTracker
 description: > # this means to ignore newlines until "baseurl:"
   Track trash pickups and get achievements!
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://rit.pics" # the base hostname & protocol for your site
+url: "https://trash.pics" # the base hostname & protocol for your site
 permalink: pretty # to remove the ".html" extension when serving file
 
 # Limit what is hosted on the site.

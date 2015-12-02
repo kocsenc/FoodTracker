@@ -6,7 +6,7 @@ This project is a high-fidelity prototype. It does not implement any business lo
 Additionally, this website was developed as a prototype of a native smartphone application, so layout on a desktop browser is non-optimal.
 
 # Running the Application
-A public version of the application is available at [https://rit.pics](https://rit.pics), but if you want to run it yourself follow the following instructions:
+A public version of the application is available at [https://trash.pics](https://trash.pics), but if you want to run it yourself follow the following instructions:
 
 1. Install the latest version of ruby and gems (on Windows get ruby < 2.2)
 2. Run `gem install bundle`
