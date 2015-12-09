@@ -4,10 +4,10 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: TrashTracker
+title: FoodTracker
 #email: your-email@domain.com
 description: > # this means to ignore newlines until "baseurl:"
-  Track trash pickups and get achievements!
+  Track Free food and get achievements!
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://trash.pics" # the base hostname & protocol for your site
 permalink: pretty # to remove the ".html" extension when serving file

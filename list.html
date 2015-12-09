@@ -7,7 +7,7 @@ title: Feed
         {% include heatmap.html %}
     </div>
     <div class="panel-body">
-        Heatmap of trash reports on RIT Campus
+        Heatmap of food reports on RIT Campus
     </div>
 </div>
 
@@ -18,12 +18,12 @@ title: Feed
     <img src="" class="img-responsive" id="postImage" />
     <div class="panel-body">    
         <div class="alert alert-info" id="postLater" style="display: none;">
-            This item needs to be picked up!
+            This item needs to be eaten!
         </div>
         <div class="row">
             <div class="col-sm-6">
                 <span class="glyphicon glyphicon-user"></span>
-                <a href="/profile">rkuehl444</a>
+                <a href="/profile">hungryman132</a>
             </div>
             <div class="col-sm-6">
                 <span class="glyphicon glyphicon-time"></span>
@@ -48,20 +48,15 @@ title: Feed
     </div>
 </div>
 
-{% include trashItem.html img="/img/00000000.jpg" user="greenfiend420" time="10-29-2015 07:31:52" %}
+{% include trashItem.html img="/img/04.jpg" user="ecofreak123" time="10-30-2015 10:12:58" msg="We had a huge debit blowout, now we have all this free food. Dorms" %}
 
-{% include trashItem.html img="/img/00000001.jpg" user="concernedcitizen51" time="10-29-2015 09:06:13" msg="Someone left a freaking toilet on the sidewalk. Too heavy for me to move myself." later=true %}
+{% include trashItem.html img="/img/00.jpg" user="greenfiend420" time="10-29-2015 07:31:52" %}
 
-{% include trashItem.html img="/img/00000002.jpg" user="ecofreak123" time="10-29-2015 13:46:02" %}
+{% include trashItem.html img="/img/01.jpg" user="concernedcitizen51" time="10-29-2015 09:06:13" msg="I made too much pasta pie! Up for grabs @ Infinity Quad" later=true %}
 
-{% include trashItem.html img="/img/00000003.jpg" user="greenfiend420" time="10-29-2015 19:29:23" msg="If someone has like, a truck or whatever, these tires should probably get thrown out" later=true %}
+{% include trashItem.html img="/img/02.jpg" user="ecofreak123" msg="Got some leftover hawaians from club meeting." time="10-29-2015 13:46:02" %}
 
-{% include trashItem.html img="/img/00000004.jpg" user="ecofreak123" time="10-30-2015 10:12:58" msg="What a mess!  Cleaning this up felt great." %}
-
-{% include trashItem.html img="/img/00000005.jpg" user="greenfiend420" time="10-30-2015 16:37:15" %}
-
-{% include trashItem.html img="/img/00000006.jpg" user="concernedcitizen51" time="10-30-2015 16:52:08" msg="Who the hell keeps leaving toilets everywhere?" later=true %}
-
+{% include trashItem.html img="/img/03.jpg" user="greenfiend420" time="10-29-2015 19:29:23" msg="Nobody ate the veggie pizza!" later=true %}
 
 <script>
 function storageAvailable(type) {

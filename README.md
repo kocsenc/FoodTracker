@@ -1,12 +1,12 @@
-# TrashTracker
-A UX demo of a trash pickup tracker for SWEN-444 Group 7.
+# FoodTracker
+A UX demo of a food tracker for Intro to Geospatial class.
 
 # Disclaimer
-This project is a high-fidelity prototype. It does not implement any business logic.
+This project is a high-fidelity prototype. It does not implement any business logic yet.
 Additionally, this website was developed as a prototype of a native smartphone application, so layout on a desktop browser is non-optimal.
 
 # Running the Application
-A public version of the application is available at [https://trash.pics](https://trash.pics), but if you want to run it yourself follow the following instructions:
+A public version of the application is available at [here](https://food.rit.lol), but if you want to run it yourself follow the following instructions:
 
 1. Install the latest version of ruby and gems (on Windows get ruby < 2.2)
 2. Run `gem install bundle`
@@ -21,7 +21,7 @@ The following sections are roughly in order for a good tour through the applicat
 ## Log in
 A login page is located at `/` and presents a username and password login interface with an option to join.
 
-## Join TrashTracker
+## Join FoodTracker
 Located at `/join/` is a registration page that includes all the important information for user creation including name, email, and password.
 
 ## Feed
@@ -38,4 +38,4 @@ From any page other than Login and Join, users can click the camera button in th
 Users can then drag the trashcan icon on the map to set the location of the pickup and submit the pickup.
 
 
-We hope you enjoy using TrashTracker!
+We hope you enjoy using FoodTracker!
